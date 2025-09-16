@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="DarkPressedButton">
+                
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BorderWidth" Value="0.4"/>
+                <Setter Property="BorderColor" Value="Black" />
+
+                <Style.Triggers>
+                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="DarkGray" />
+                        <Setter Property="TextColor" Value="Black" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+
+
+        
+        <Entry x:Name="TextCalculatorHistory" Grid.Column="0" Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" FontSize="35" HorizontalTextAlignment="End" IsReadOnly="True" TextColor="Grey" />
+        <Entry x:Name="TextCalculator" Grid.Column="0" Grid.Row="1" HorizontalOptions="End" VerticalOptions="End" FontSize="65" HorizontalTextAlignment="End" IsReadOnly="True" />
+
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+
+            <Button Clicked="Procent" Text="%" Background="#EBEBEB"  Grid.Row="0" Grid.Column="0"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="Koren" Text="√ " Background="#EBEBEB"  Grid.Row="0" Grid.Column="1"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="Kvadrat" Text="x²" Background="#EBEBEB" Grid.Row="0" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="drob" Text="1/x" Background="#EBEBEB"  Grid.Row="0" Grid.Column="3"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="DeleteCE" Text="CE" Background="#EBEBEB" Grid.Row="1" Grid.Column="0"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="DeleteC" Text="C" Background="#EBEBEB"  Grid.Row="1" Grid.Column="1"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="Delete" Text="⌫" Background="#EBEBEB"  Grid.Row="1" Grid.Column="2" FontSize="Title"   Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="delenie" Text="÷" Background="#EBEBEB"  Grid.Row="1" Grid.Column="3" FontSize="37"  Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="Seven" Text="7" Background="White"  Grid.Row="2" Grid.Column="0"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="eight" Text="8" Background="White"  Grid.Row="2" Grid.Column="1" FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="nine" Text="9" Background="White"  Grid.Row="2" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="umnozhenie" Text="X" Background="#EBEBEB" Grid.Row="2" Grid.Column="3"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="four" Text="4" Background="White" Grid.Row="3" Grid.Column="0" FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="five" Text="5" Background="White"  Grid.Row="3" Grid.Column="1" FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="six" Text="6" Background="White"  Grid.Row="3" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="minus" Text="—" Background="#EBEBEB" Grid.Row="3" Grid.Column="3" FontSize="Title"  Style="{StaticResource DarkPressedButton}"/>
+
+            <Button Clicked="one" Text="1" Background="White"   Grid.Row="4" Grid.Column="0"  FontSize="Title"  Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="two" Text="2" Background="White"  Grid.Row="4" Grid.Column="1"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="three" Text="3" Background="White"  Grid.Row="4" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="plus" Text="+" Background="#EBEBEB"  Grid.Row="4" Grid.Column="3" FontSize="35" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="plusminus" Text="±" Background="#EBEBEB" Grid.Row="5" Grid.Column="0" FontSize="30" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="zero" Text="0" Background="White"  Grid.Row="5" Grid.Column="1" FontSize="Title"  Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="zapataya" Text="," Background="#EBEBEB"  Grid.Row="5" Grid.Column="2" FontSize="35" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="ravno" Text="=" Background="#EBEBEB"  Grid.Row="5" Grid.Column="3" FontSize="35" Style="{StaticResource DarkPressedButton}"/>
+
+
+
+
+
+        </Grid>
+    </Grid>
+
+
+
+
+
+
+</ContentPage>
