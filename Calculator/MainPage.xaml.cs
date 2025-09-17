@@ -1,24 +1,26 @@
-﻿namespace Calculator
+﻿using Microsoft.Maui.Graphics.Text;
+
+namespace Calculator
 {
     public partial class MainPage : ContentPage
     {
         int i = 0;
-        int z; 
+        float z = 0;
+        string x = "";
         public MainPage()
         {
             InitializeComponent();
-
+            TextCalculator.Text = "0";
 
             BindingContext = this;
-
 
         }
 
         private void Seven(object sender, EventArgs e)
         {
-            TextCalculator.Text += "7";
+            Noll("7");
+            x = "";
 
-            Resize();
 
 
         }
@@ -26,27 +28,36 @@
 
         private void Delete(object sender, EventArgs e)
         {
-            int ii = TextCalculator.Text.Length-1;
-
-            if (ii >= 0)
+            if (TextCalculator.Text != "0")
             {
-                TextCalculator.Text = TextCalculator.Text.Remove(ii);
-                i--;
-                
-                if (i >= 9)
-                {
-                    TextCalculator.FontSize += 3;
-                }
 
+                int ii = TextCalculator.Text.Length-1;
+
+                if (ii >= 0)
+                {
+                    TextCalculator.Text = TextCalculator.Text.Remove(ii);
+                    i--;
+                
+                    if (i >= 9)
+                    {
+                        TextCalculator.FontSize += 3;
+                    }
+
+                }
             }
+            if (TextCalculator.Text.Length == 0)
+                TextCalculator.Text = "0";
         }
 
         private void DeleteC(object sender, EventArgs e)
         {
+            
             TextCalculator.Text = "";
             TextCalculatorHistory.Text = "";
             i = 0;
+            x = "";
             TextCalculator.FontSize = 65;
+            TextCalculator.Text = "0";
         }
 
         private void DeleteCE(object sender, EventArgs e)
@@ -54,6 +65,7 @@
             TextCalculator.Text = "";
             i = 0;
             TextCalculator.FontSize = 65;
+            TextCalculator.Text = "0";
         }
 
         private void Procent(object sender, EventArgs e)
@@ -78,90 +90,94 @@
 
         private void delenie(object sender, EventArgs e)
         {
-
+            IsZnak("/");
+            TextCalculator.Text = "0";
         }
 
         private void eight(object sender, EventArgs e)
         {
-            TextCalculator.Text += "8";
+            Noll("8");
+            x = "";
 
-            Resize();
 
         }
 
         private void nine(object sender, EventArgs e)
         {
-            TextCalculator.Text += "9";
-
-            Resize();
+            Noll("9");
+            x = "";
 
         }
 
         private void umnozhenie(object sender, EventArgs e)
         {
 
+            IsZnak("*");
+            TextCalculator.Text = "0";
+            i = 0;
         }
 
         private void four(object sender, EventArgs e)
         {
-            TextCalculator.Text += "4";
+            Noll("4");
+            x = "";
 
-            Resize();
 
         }
 
         private void five(object sender, EventArgs e)
         {
-            TextCalculator.Text += "5";
+            Noll("5");
+            x = "";
 
-            Resize();
 
         }
 
         private void six(object sender, EventArgs e)
         {
-            TextCalculator.Text += "6";
+            Noll("6");
+            x = "";
 
-            Resize();
 
         }
 
         private void minus(object sender, EventArgs e)
         {
-
-            TextCalculatorHistory.Text += TextCalculator.Text + "-";
-            TextCalculator.Text = "";
+            IsZnak("-");
+            TextCalculator.Text = "0";
             i = 0;
   
         }
 
         private void one(object sender, EventArgs e)
         {
-            TextCalculator.Text += "1";
+            Noll("1");
+            x = "";
 
-            Resize();
 
         }
 
         private void two(object sender, EventArgs e)
         {
-            TextCalculator.Text += "2";
+            Noll("2");
+            x = "";
 
-            Resize();
 
         }
 
         private void three(object sender, EventArgs e)
         {
-            TextCalculator.Text += "3";
+            Noll("3");
+            x = "";
 
-            Resize();
 
         }
 
         private void plus(object sender, EventArgs e)
         {
-
+            IsZnak("+");
+            TextCalculator.Text = "0";
+            i = 0;
         }
 
         private void plusminus(object sender, EventArgs e)
@@ -171,9 +187,9 @@
 
         private void zero(object sender, EventArgs e)
         {
-            TextCalculator.Text += "0";
+            Noll("0");
+            x = "";
 
-            Resize();
 
         }
 
@@ -181,12 +197,12 @@
         {
             TextCalculator.Text += ",";
 
-            Resize();
         }
 
         private void ravno(object sender, EventArgs e)
         {
 
+            x = "";
         }
 
         private void Resize ()
@@ -197,6 +213,38 @@
             {
                 TextCalculator.FontSize -= 3;
             }
+        }
+        public void IsZnak(string A)
+        {
+            if (x != "")
+            {
+                x = A;
+                int ii = TextCalculatorHistory.Text.Length - 1;
+                TextCalculatorHistory.Text = TextCalculatorHistory.Text.Remove(ii);
+                TextCalculatorHistory.Text += x;
+            }
+            else
+            {
+                x = A;
+                TextCalculatorHistory.Text += TextCalculator.Text + x;
+            }
+        }
+        public void Noll(string A)
+        {
+            if (TextCalculator.Text == "0")
+            {
+                TextCalculator.Text = A;
+            }
+            else
+            {
+                TextCalculator.Text += A;
+                Resize();
+            }
+        }
+        public void Calculate()
+        {
+            switch(x){
+            };
         }
     }
 }
