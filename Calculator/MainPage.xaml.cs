@@ -5,7 +5,7 @@ namespace Calculator
     public partial class MainPage : ContentPage
     {
         int i = 0;
-        float z = 0;
+        double z = 0;
         string x = "";
         public MainPage()
         {
@@ -20,11 +20,7 @@ namespace Calculator
         {
             Noll("7");
             x = "";
-
-
-
         }
-
 
         private void Delete(object sender, EventArgs e)
         {
@@ -70,22 +66,47 @@ namespace Calculator
 
         private void Procent(object sender, EventArgs e)
         {
-
+            double value;
+            if (double.TryParse(TextCalculator.Text, out value))
+            {
+                value = value / 100;
+                TextCalculator.Text = value.ToString();
+            }
         }
 
         private void Koren(object sender, EventArgs e)
         {
-
+            double value;
+            if (double.TryParse(TextCalculator.Text, out value) && value >= 0)
+            {
+                TextCalculator.Text = Math.Sqrt(value).ToString();
+            }
+            else
+            {
+                DisplayAlert("Ошибка", "Нельзя извлечь корень из отрицательного числа", "OK");
+            }
         }
 
         private void Kvadrat(object sender, EventArgs e)
         {
-
+            double value;
+            if (double.TryParse(TextCalculator.Text, out value))
+            {
+                TextCalculator.Text = Math.Pow(value, 2).ToString();
+            }
         }
 
         private void drob(object sender, EventArgs e)
         {
-
+            double value;
+            if (double.TryParse(TextCalculator.Text, out value) && value != 0)
+            {
+                TextCalculator.Text = (1 / value).ToString();
+            }
+            else
+            {
+                DisplayAlert("Ошибка", "Деление на ноль!", "OK");
+            }
         }
 
         private void delenie(object sender, EventArgs e)
@@ -182,7 +203,10 @@ namespace Calculator
 
         private void plusminus(object sender, EventArgs e)
         {
-
+            if (TextCalculator.Text.StartsWith("-"))
+                TextCalculator.Text = TextCalculator.Text.Substring(1);
+            else if (TextCalculator.Text != "0")
+                TextCalculator.Text = "-" + TextCalculator.Text;
         }
 
         private void zero(object sender, EventArgs e)
@@ -195,8 +219,10 @@ namespace Calculator
 
         private void zapataya(object sender, EventArgs e)
         {
-            TextCalculator.Text += ",";
-
+            if (!TextCalculator.Text.Contains(","))
+            {
+                TextCalculator.Text += ",";
+            }
         }
 
         private void ravno(object sender, EventArgs e)
@@ -246,5 +272,7 @@ namespace Calculator
             switch(x){
             };
         }
+
+
     }
 }
