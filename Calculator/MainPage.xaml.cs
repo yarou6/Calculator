@@ -7,6 +7,9 @@ namespace Calculator
         int i = 0;
         double z = 0;
         string x = "";
+        bool znak;
+        bool chislo = false;
+        bool chet = false;
         public MainPage()
         {
             InitializeComponent();
@@ -19,7 +22,6 @@ namespace Calculator
         private void Seven(object sender, EventArgs e)
         {
             Noll("7");
-            x = "";
         }
 
         private void Delete(object sender, EventArgs e)
@@ -27,13 +29,13 @@ namespace Calculator
             if (TextCalculator.Text != "0")
             {
 
-                int ii = TextCalculator.Text.Length-1;
+                int ii = TextCalculator.Text.Length - 1;
 
                 if (ii >= 0)
                 {
                     TextCalculator.Text = TextCalculator.Text.Remove(ii);
                     i--;
-                
+
                     if (i >= 9)
                     {
                         TextCalculator.FontSize += 3;
@@ -47,11 +49,12 @@ namespace Calculator
 
         private void DeleteC(object sender, EventArgs e)
         {
-            
+
             TextCalculator.Text = "";
             TextCalculatorHistory.Text = "";
             i = 0;
             x = "";
+            znak = false;
             TextCalculator.FontSize = 65;
             TextCalculator.Text = "0";
         }
@@ -112,92 +115,64 @@ namespace Calculator
         private void delenie(object sender, EventArgs e)
         {
             IsZnak("/");
-            TextCalculator.Text = "0";
         }
 
         private void eight(object sender, EventArgs e)
         {
             Noll("8");
-            x = "";
-
-
         }
 
         private void nine(object sender, EventArgs e)
         {
             Noll("9");
-            x = "";
-
         }
 
         private void umnozhenie(object sender, EventArgs e)
         {
-
             IsZnak("*");
-            TextCalculator.Text = "0";
             i = 0;
         }
 
         private void four(object sender, EventArgs e)
         {
             Noll("4");
-            x = "";
-
-
         }
 
         private void five(object sender, EventArgs e)
         {
             Noll("5");
-            x = "";
-
-
         }
 
         private void six(object sender, EventArgs e)
         {
             Noll("6");
-            x = "";
-
-
         }
 
         private void minus(object sender, EventArgs e)
         {
             IsZnak("-");
-            TextCalculator.Text = "0";
             i = 0;
-  
+
         }
 
         private void one(object sender, EventArgs e)
         {
             Noll("1");
-            x = "";
-
-
         }
 
         private void two(object sender, EventArgs e)
         {
             Noll("2");
-            x = "";
-
-
         }
 
         private void three(object sender, EventArgs e)
         {
             Noll("3");
-            x = "";
-
-
         }
 
         private void plus(object sender, EventArgs e)
         {
             IsZnak("+");
-            TextCalculator.Text = "0";
             i = 0;
         }
 
@@ -212,9 +187,6 @@ namespace Calculator
         private void zero(object sender, EventArgs e)
         {
             Noll("0");
-            x = "";
-
-
         }
 
         private void zapataya(object sender, EventArgs e)
@@ -227,11 +199,16 @@ namespace Calculator
 
         private void ravno(object sender, EventArgs e)
         {
-
-            x = "";
+            if (!chet)
+            {
+                TextCalculatorHistory.Text += TextCalculator.Text + "=";
+                Calculate();
+                chet = true;
+                znak = false;
+            }
         }
 
-        private void Resize ()
+        private void Resize()
         {
             i++;
 
@@ -242,7 +219,13 @@ namespace Calculator
         }
         public void IsZnak(string A)
         {
-            if (x != "")
+            if (!chet) Calculate();
+            if (chet)
+            {
+                x = A;
+                TextCalculatorHistory.Text = TextCalculator.Text + x;
+            }
+            else if (znak)
             {
                 x = A;
                 int ii = TextCalculatorHistory.Text.Length - 1;
@@ -253,11 +236,20 @@ namespace Calculator
             {
                 x = A;
                 TextCalculatorHistory.Text += TextCalculator.Text + x;
+                double.TryParse(TextCalculator.Text, out z);
             }
+            chislo = false;
+            znak = true;
+            chet = false;
         }
         public void Noll(string A)
         {
-            if (TextCalculator.Text == "0")
+            if (chet)
+            {
+                TextCalculatorHistory.Text = "";
+                TextCalculator.Text = A;
+            }
+            else if (!chislo || TextCalculator.Text == "0")
             {
                 TextCalculator.Text = A;
             }
@@ -266,10 +258,32 @@ namespace Calculator
                 TextCalculator.Text += A;
                 Resize();
             }
+            chislo = true;
+            znak = false;
+            chet = false;
         }
         public void Calculate()
         {
-            switch(x){
+            double icalculator;
+            switch (x)
+            {
+                case "+":
+                    double.TryParse(TextCalculator.Text, out icalculator);
+                    TextCalculator.Text = (z += icalculator).ToString();
+                    break;
+                case "-":
+                    double.TryParse(TextCalculator.Text, out icalculator);
+                    TextCalculator.Text = (z -= icalculator).ToString();
+                    break;
+                case "*":
+                    double.TryParse(TextCalculator.Text, out icalculator);
+                    TextCalculator.Text = (z *= icalculator).ToString();
+                    break;
+                case "/":
+                    double.TryParse(TextCalculator.Text, out icalculator);
+                    TextCalculator.Text = (z /= icalculator).ToString();
+                    break;
+
             };
         }
 
