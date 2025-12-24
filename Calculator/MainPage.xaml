@@ -1,28 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Calculator.MainPage">
+             x:Class="Calculator.MainPage"
+             Background="#1E1B2E">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+
+            <!-- Основной стиль кнопок -->
             <Style TargetType="Button" x:Key="DarkPressedButton">
-                
-                <Setter Property="TextColor" Value="Black" />
-                <Setter Property="CornerRadius" Value="10" />
-                <Setter Property="BorderWidth" Value="0.4"/>
-                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="14"/>
+                <Setter Property="BorderWidth" Value="0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
 
                 <Style.Triggers>
                     <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                        <Setter Property="Background" Value="DarkGray" />
-                        <Setter Property="TextColor" Value="Black" />
+                        <Setter Property="Background" Value="#C084FC"/>
+                        <Setter Property="TextColor" Value="Black"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
+            <!-- Цвета -->
+            <Color x:Key="NumberButton">#2D2645</Color>
+            <Color x:Key="OperatorButton">#7C3AED</Color>
+            <Color x:Key="AccentButton">#EC4899</Color>
+            <Color x:Key="UtilityButton">#3B335A</Color>
+
         </ResourceDictionary>
     </ContentPage.Resources>
-    
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
@@ -30,20 +38,32 @@
             <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
 
+        <!-- История -->
+        <Entry x:Name="TextCalculatorHistory"
+               Grid.Row="0"
+               FontSize="35"
+               HorizontalTextAlignment="End"
+               IsReadOnly="True"
+               TextColor="#BDA4FF"
+               BackgroundColor="Transparent"/>
 
-        
-        <Entry x:Name="TextCalculatorHistory" Grid.Column="0" Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" FontSize="35" HorizontalTextAlignment="End" IsReadOnly="True" TextColor="Grey" />
-        <Entry x:Name="TextCalculator" Grid.Column="0" Grid.Row="1" HorizontalOptions="End" VerticalOptions="End" FontSize="65" HorizontalTextAlignment="End" IsReadOnly="True" />
-
+        <!-- Основной экран -->
+        <Entry x:Name="TextCalculator"
+               Grid.Row="1"
+               FontSize="65"
+               HorizontalTextAlignment="End"
+               IsReadOnly="True"
+               TextColor="White"
+               BackgroundColor="Transparent"/>
 
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -53,44 +73,39 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <!-- Верхние функции -->
+            <Button Clicked="Procent" Text="%" Background="{StaticResource UtilityButton}" Grid.Row="0" Grid.Column="0" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="Koren" Text="√" Background="{StaticResource UtilityButton}" Grid.Row="0" Grid.Column="1" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="Kvadrat" Text="x²" Background="{StaticResource UtilityButton}" Grid.Row="0" Grid.Column="2" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="drob" Text="1/x" Background="{StaticResource UtilityButton}" Grid.Row="0" Grid.Column="3" Style="{StaticResource DarkPressedButton}"/>
 
+            <Button Clicked="DeleteCE" Text="CE" Background="{StaticResource UtilityButton}" Grid.Row="1" Grid.Column="0" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="DeleteC" Text="C" Background="{StaticResource UtilityButton}" Grid.Row="1" Grid.Column="1" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="Delete" Text="⌫" Background="{StaticResource UtilityButton}" Grid.Row="1" Grid.Column="2" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="delenie" Text="÷" Background="{StaticResource OperatorButton}" Grid.Row="1" Grid.Column="3" Style="{StaticResource DarkPressedButton}"/>
 
-            <Button Clicked="Procent" Text="%" Background="#EBEBEB"  Grid.Row="0" Grid.Column="0"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="Koren" Text="√ " Background="#EBEBEB"  Grid.Row="0" Grid.Column="1"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="Kvadrat" Text="x²" Background="#EBEBEB" Grid.Row="0" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="drob" Text="1/x" Background="#EBEBEB"  Grid.Row="0" Grid.Column="3"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="DeleteCE" Text="CE" Background="#EBEBEB" Grid.Row="1" Grid.Column="0"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="DeleteC" Text="C" Background="#EBEBEB"  Grid.Row="1" Grid.Column="1"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="Delete" Text="⌫" Background="#EBEBEB"  Grid.Row="1" Grid.Column="2" FontSize="Title"   Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="delenie" Text="÷" Background="#EBEBEB"  Grid.Row="1" Grid.Column="3" FontSize="37"  Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="Seven" Text="7" Background="White"  Grid.Row="2" Grid.Column="0"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="eight" Text="8" Background="White"  Grid.Row="2" Grid.Column="1" FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="nine" Text="9" Background="White"  Grid.Row="2" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="umnozhenie" Text="X" Background="#EBEBEB" Grid.Row="2" Grid.Column="3"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="four" Text="4" Background="White" Grid.Row="3" Grid.Column="0" FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="five" Text="5" Background="White"  Grid.Row="3" Grid.Column="1" FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="six" Text="6" Background="White"  Grid.Row="3" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="minus" Text="—" Background="#EBEBEB" Grid.Row="3" Grid.Column="3" FontSize="Title"  Style="{StaticResource DarkPressedButton}"/>
+            <!-- Цифры -->
+            <Button Clicked="Seven" Text="7" Background="{StaticResource NumberButton}" Grid.Row="2" Grid.Column="0" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="eight" Text="8" Background="{StaticResource NumberButton}" Grid.Row="2" Grid.Column="1" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="nine" Text="9" Background="{StaticResource NumberButton}" Grid.Row="2" Grid.Column="2" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="umnozhenie" Text="×" Background="{StaticResource OperatorButton}" Grid.Row="2" Grid.Column="3" Style="{StaticResource DarkPressedButton}"/>
 
-            <Button Clicked="one" Text="1" Background="White"   Grid.Row="4" Grid.Column="0"  FontSize="Title"  Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="two" Text="2" Background="White"  Grid.Row="4" Grid.Column="1"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="three" Text="3" Background="White"  Grid.Row="4" Grid.Column="2"  FontSize="Title" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="plus" Text="+" Background="#EBEBEB"  Grid.Row="4" Grid.Column="3" FontSize="35" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="plusminus" Text="±" Background="#EBEBEB" Grid.Row="5" Grid.Column="0" FontSize="30" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="zero" Text="0" Background="White"  Grid.Row="5" Grid.Column="1" FontSize="Title"  Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="zapataya" Text="," Background="#EBEBEB"  Grid.Row="5" Grid.Column="2" FontSize="35" Style="{StaticResource DarkPressedButton}"/>
-            <Button Clicked="ravno" Text="=" Background="#EBEBEB"  Grid.Row="5" Grid.Column="3" FontSize="35" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="four" Text="4" Background="{StaticResource NumberButton}" Grid.Row="3" Grid.Column="0" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="five" Text="5" Background="{StaticResource NumberButton}" Grid.Row="3" Grid.Column="1" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="six" Text="6" Background="{StaticResource NumberButton}" Grid.Row="3" Grid.Column="2" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="minus" Text="—" Background="{StaticResource OperatorButton}" Grid.Row="3" Grid.Column="3" Style="{StaticResource DarkPressedButton}"/>
 
+            <Button Clicked="one" Text="1" Background="{StaticResource NumberButton}" Grid.Row="4" Grid.Column="0" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="two" Text="2" Background="{StaticResource NumberButton}" Grid.Row="4" Grid.Column="1" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="three" Text="3" Background="{StaticResource NumberButton}" Grid.Row="4" Grid.Column="2" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="plus" Text="+" Background="{StaticResource OperatorButton}" Grid.Row="4" Grid.Column="3" Style="{StaticResource DarkPressedButton}"/>
 
-
-
+            <!-- Низ -->
+            <Button Clicked="plusminus" Text="±" Background="{StaticResource UtilityButton}" Grid.Row="5" Grid.Column="0" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="zero" Text="0" Background="{StaticResource NumberButton}" Grid.Row="5" Grid.Column="1" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="zapataya" Text="," Background="{StaticResource UtilityButton}" Grid.Row="5" Grid.Column="2" Style="{StaticResource DarkPressedButton}"/>
+            <Button Clicked="ravno" Text="=" Background="{StaticResource AccentButton}" Grid.Row="5" Grid.Column="3" Style="{StaticResource DarkPressedButton}"/>
 
         </Grid>
     </Grid>
-
-
-
-
-
-
 </ContentPage>
